@@ -8,6 +8,7 @@ import java.awt.event.*;
 public class CalcFinal extends JFrame{
 
     Clicklistener click = new Clicklistener();
+    SimpleGraph graph = new SimpleGraph();
 
     private ColorPanel panel = new ColorPanel();
     JTextField equationInput = new JTextField();
@@ -44,8 +45,15 @@ public class CalcFinal extends JFrame{
     private class Clicklistener implements ActionListener{
         
         public void actionPerformed(ActionEvent e){
-            
-            System.out.print(equationInput.getText());
+            graph.setEquation(equationInput.getText());
+
+            for (double i = 0; i < 10000; i ++){
+                double x = (i - 5000)/1000;
+                panel.createCoordinates(x, graph.Calculate(x, equationInput.getText(), 0)[1], (int)i);
+                //System.out.println("Y value: " + graph.Calculate(x, equationInput.getText(), 0)[1]);
+            }
+            panel.repaint();
+            //System.out.print("Calculations done");
         }
     
     }
