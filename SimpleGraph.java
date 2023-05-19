@@ -6,9 +6,11 @@ import java.math.*;
 // 12xe^2 = 12x * e^2
 //!!!!!!!!
 
-//make -x work as intended
+//make -trig work as intended
 //make the 1st term check work if it starts with sin
 //incorporate ln functions in normal runnnings
+
+//make x aa recursive function - new breakstatement 3 that stops for anything but exponents
 
 //to evalutae, convert string to number vaules of characters, use a large switch statement to step through each thing
 //make the function recursive, so that if it encounters addition or parenthesis it evaluates thos before combining
@@ -227,11 +229,10 @@ public class SimpleGraph{
                     // s
                     case 115:
                     if (equation.charAt(i + 1) == 105 && equation.charAt(i + 2) == 110){
-                        calcResults = Calculate(x, equation.substring(i + 2, equation.length()), 1);
+                        currentValue = 1;
+                        calcResults = Calculate(x, equation.substring(i + 3, equation.length()), 2);
                         currentValue = currentValue * Math.sin(calcResults[1]); 
-                        //System.out.println("(" + currentValue * Math.sin(calcResults[1]) + ")");
-                        //System.out.println(" " + calcResults[1]);
-                        i = (int) (i + calcResults[0]);
+                        i = (int) (i + calcResults[0] + 3);
                     }
                     break;
     
@@ -246,9 +247,10 @@ public class SimpleGraph{
                     // c
                     case 99:
                     if (equation.charAt(i + 1) == 111 && equation.charAt(i + 2) == 115){
-                        calcResults = Calculate(x, equation.substring(i + 1, equation.length()), 1);
+                        currentValue = 1;
+                        calcResults = Calculate(x, equation.substring(i + 3, equation.length()), 1);
                         currentValue = currentValue * Math.cos(calcResults[1]);
-                        i = (int) (i + calcResults[0]);
+                        i = (int) (i + calcResults[0] + 3);
                     }
                     break;
     
@@ -259,9 +261,10 @@ public class SimpleGraph{
                     // t
                     case 116:
                     if (equation.charAt(i + 1) == 97 && equation.charAt(i + 2) == 110){
-                        calcResults = Calculate(x, equation.substring(i + 1, equation.length()), 1);
+                        currentValue = 1;
+                        calcResults = Calculate(x, equation.substring(i + 3, equation.length()), 1);
                         currentValue = currentValue * Math.tan(calcResults[1]);
-                        i = (int) (i + calcResults[0]);
+                        i = (int) (i + calcResults[0] + 3);
                     }
                     break;
     
@@ -277,7 +280,9 @@ public class SimpleGraph{
                     //l
                     case 108:
                     if (equation.charAt(i + 1) == 110){
-                        currentValue = currentValue * Math.log(Calculate(x, equation.substring(i + 1,equation.length()), 1)[1]);
+                        currentValue = 1;
+                        currentValue = currentValue * Math.log(Calculate(x, equation.substring(i + 2,equation.length()), 1)[1]);
+                        i = (int) (i + calcResults[0] + 2);
                     }
                     break;
     
@@ -428,9 +433,9 @@ public class SimpleGraph{
                     i = equation.length();
                 }
                 else if (equation.charAt(i + 1) == 105 && equation.charAt(i + 2) == 110){
-                    calcResults = Calculate(x, equation.substring(i + 1, equation.length()), 1);
-                    currentValue = currentValue * Math.sin(calcResults[1]);
-                    i = (int) (i + calcResults[0]);
+                    calcResults = Calculate(x, equation.substring(i + 3, equation.length()), 2);
+                    currentValue = currentValue * Math.sin(calcResults[1]); 
+                    i = (int) (i + calcResults[0] + 3);
                 }
                 break;
 
@@ -450,9 +455,9 @@ public class SimpleGraph{
                     i = equation.length();
                 }
                 else if (equation.charAt(i + 1) == 111 && equation.charAt(i + 2) == 115){
-                    calcResults = Calculate(x, equation.substring(i + 1, equation.length()), 1);
+                    calcResults = Calculate(x, equation.substring(i + 3, equation.length()), 1);
                     currentValue = currentValue * Math.cos(calcResults[1]);
-                    i = (int) (i + calcResults[0]);
+                    i = (int) (i + calcResults[0] + 3);
                 }
                 break;
 
@@ -467,9 +472,9 @@ public class SimpleGraph{
                     i = equation.length();
                 }
                 else if (equation.charAt(i + 1) == 97 && equation.charAt(i + 2) == 110){
-                    calcResults = Calculate(x, equation.substring(i + 1, equation.length()), 1);
+                    calcResults = Calculate(x, equation.substring(i + 3, equation.length()), 1);
                     currentValue = currentValue * Math.tan(calcResults[1]);
-                    i = (int) (i + calcResults[0]);
+                    i = (int) (i + calcResults[0] + 3);
                 }
                 break;
 
@@ -489,7 +494,8 @@ public class SimpleGraph{
                     i = equation.length();
                 }
                 else if (equation.charAt(i + 1) == 110){
-                    currentValue = currentValue * Math.log(Calculate(x, equation.substring(i + 1,equation.length()), 1)[1]);
+                    currentValue = currentValue * Math.log(Calculate(x, equation.substring(i + 2,equation.length()), 1)[1]);
+                    i = (int) (i + calcResults[0] + 2);
                 }
                 break;
 
