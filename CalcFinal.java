@@ -47,8 +47,8 @@ public class CalcFinal extends JFrame{
         public void actionPerformed(ActionEvent e){
             graph.setEquation(equationInput.getText());
 
-            for (double i = 0; i < 10000; i ++){
-                double x = (i - 5000)/1000;
+            for (double i = 0; i < 20000; i ++){
+                double x = (i - 10000)/1000;
                 panel.createCoordinates(x, graph.Calculate(x, equationInput.getText(), 0)[1], (int)i);
                 //System.out.println("Y value: " + graph.Calculate(x, equationInput.getText(), 0)[1]);
             }
